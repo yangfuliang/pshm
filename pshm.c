@@ -132,10 +132,10 @@ PHP_MINFO_FUNCTION(pshm)
 ZEND_FUNCTION(shm_write)
 {
 	long key, buf_size;
-	int shmid, content_len;
-	char *shmptr, *content;
+	int shmid, value_len;
+	char *shmptr, *value;
 
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lls",&key, &buf_size, &content, &content_len) == FAILURE)
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "lls",&key, &buf_size, &value, &value_len) == FAILURE)
 	{
 		RETURN_NULL();
 	}
@@ -146,7 +146,7 @@ ZEND_FUNCTION(shm_write)
 	shmptr = shmat(shmid, 0, 0);
 	if (shmptr == (void *)-1) RETURN_FALSE;
 
-	strcpy(shmptr, content);
+	strcpy(shmptr, value);
 	shmdt(shmptr);
 
 	RETURN_TRUE;
