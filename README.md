@@ -10,5 +10,6 @@ shm_read(int key);
 echo shm_read(100);
 ```
 ```
+shm_clear(int key);
 shm_clear(100);
 ```
